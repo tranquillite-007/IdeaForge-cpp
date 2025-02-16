@@ -100,10 +100,6 @@ We welcome contributions! Follow these steps:
 - **Machine Learning Suggestions** – Suggest word combinations based on user preferences.
 - **Web Version** – Convert into a web-based application.
 
-## 📜 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## 🙌 Acknowledgments
 
 - Inspired by brainstorming techniques used in game development.
