@@ -1,12 +1,13 @@
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <string>
-#include <sstream>
+#include <fstream> // For FileHandling
+#include <iostream>// For I/O
+#include <vector>  // For <vector>
+#include <string>  // For substr()
+#include <sstream> // for stringStream
 #include <cstdlib> // For rand() and srand()
-#include <ctime>   // For time()
-#include <thread>  // For std::this_thread::sleep_for
-#include <chrono>  // For std::chrono::milliseconds
+#include <ctime>   // For time() 
+#include <thread>  // For this_thread::sleep_for
+#include <chrono>  // For chrono::milliseconds
+#include <iomanip> // For setw
 
 using namespace std;
 
@@ -36,7 +37,7 @@ public:
 
     // Function to extract all categories from inputFile
     vector<string> extractCategoryName() {
-        vector<string> catItems; // catItems to store categories which are started with #
+        vector<string> catItems;                                                            // catItems to store categories which are started with #
         while (getline(inputFile, line)) {
             if (!line.empty() && line[0] == '#') {
                 string item = line.substr(1);
@@ -48,7 +49,7 @@ public:
 
     // Function to extract values for a specific category
     vector<string> extractValuesForCategory(const string& category) {
-        vector<string> values; // values vector to store words in each category
+        vector<string> values;                                                                     // values vector to store words in each category
         inputFile.clear();
         inputFile.seekg(0);
         bool foundCategory = false;
@@ -65,7 +66,8 @@ public:
                         values.push_back(value);
                     }
                 }
-                break; // Exit after finding the category
+                break; 
+				// Exit after finding the category
             }
         }
         return values;
@@ -79,7 +81,7 @@ private:
     vector<string> catItems; 
     int choiceCount, id;
     vector<int> choosenVector; 
-    vector<vector<string>> values; // To store values for each chosen category
+    vector<vector<string>> values;                                                           // To store values for each chosen category
 
 public:
     // Constructor to initialize FileManager and extract categories
@@ -104,6 +106,7 @@ public:
                 cin >> id;
                 if (id >= 0 && id < catItems.size()) { 
                     choosenVector.push_back(id);
+                    
                     // Extract values for the chosen category
                     vector<string> categoryValues = fm.extractValuesForCategory(catItems[id]);
                     values.push_back(categoryValues);
@@ -125,11 +128,15 @@ public:
     }
 
     vector<vector<string>> getValues() {
-        return values; // Return the values for random generation
+        return values; 
     }
 
     vector<int> getChosenVector() {
-        return choosenVector; // Return the chosen vector for random generation
+        return choosenVector; 
+    }
+
+    vector<string> getCategoryNames() {
+        return catItems; 
     }
 
     void reset() {
@@ -141,11 +148,11 @@ public:
 // Class to handle random word generation
 class RandomWordGenerator {
 private:
-    UserHandler& userHandler; // Reference to UserHandler to access selected categories and values
+    UserHandler& userHandler;
 
 public:
     RandomWordGenerator(UserHandler& uh) : userHandler(uh) {
-        srand(static_cast<unsigned int>(time(0))); // Seed for random number generation
+        srand(static_cast<unsigned int>(time(0)));                                  // Seed for random number generation
     }
 
     void generateRandomWords() {
@@ -160,30 +167,40 @@ public:
 
         vector<vector<string>> values = userHandler.getValues();
         vector<int> chosenVector = userHandler.getChosenVector();
+        vector<string> catItems = userHandler.getCategoryNames(); 
+
 
         // Loading animation
         cout << "Generating random words";
-        for (int i = 0; i < 5; ++i) {
-            cout << ".";
-            std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Delay for 500 milliseconds
+        const char spinner[] = {'|', '/', '-', '\\'};
+        for (int i = 0; i < 20; ++i) { 
+            cout << "\r" << "Generating random words " << spinner[i % 4] << flush;
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));                             // Delay for 200 milliseconds
         }
         cout << endl;
 
         // Delay before printing the random words
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // Additional delay of 1 second
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));                                // Additional delay of 1 second
 
-        cout << "Randomly generated words:" << endl;
+        // Print the table header
+        cout << "+----------------+----------------+" << endl;
+        cout << "| Category       | Random Word    |" << endl;
+        cout << "+----------------+----------------+" << endl;
+
+        // Store generated words for the table
         for (size_t i = 0; i < chosenVector.size(); ++i) {
+            cout << "| " << left << setw(14) << catItems[chosenVector[i]];
+
             for (int j = 0; j < numWords; ++j) {
                 if (j < values[i].size()) { 
                     int randomIndex = rand() % values[i].size(); 
-                    cout << values[i][randomIndex]; 
+                    cout << "| " << left << setw(14) << values[i][randomIndex];
                     if (j < numWords - 1) {
-                        cout << ", "; 
+                        cout << endl << "| " << left << setw(14) << "";
                     }
                 }
             }
-            cout << endl; 
+            cout << endl << "+----------------+----------------+" << endl; 
         }
     }
 };
