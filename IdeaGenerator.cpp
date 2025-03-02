@@ -1,5 +1,3 @@
-final updated version
-
 #include <fstream> // For FileHandling
 #include <iostream>// For I/O
 #include <vector>  // For <vector>
@@ -232,7 +230,7 @@ int main() {
         cin >> userChoice;
 
         // Validate user input
-        while (userChoice != 'O' && userChoice != 'X') {
+        while (userChoice != 'o' && userChoice != 'x') {
             cout << "Invalid input. Please press 'O' for Yes or 'X' for No: ";
             cin >> userChoice;
         }
@@ -240,7 +238,7 @@ int main() {
         // Reset UserHandler for the next iteration
         uh.reset();
 
-    } while (userChoice == 'O');
+    } while (userChoice == 'o');
 
     cout << "Exiting the program. Goodbye!" << endl;
     return 0;

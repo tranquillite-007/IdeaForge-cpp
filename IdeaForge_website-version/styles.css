@@ -1,0 +1,128 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 800px; /* Increased width for better layout */
+    width: 100%; /* Full width */
+    height: 90vh; /* 90% of viewport height */
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a); /* Gradient background */
+    border: 2px solid transparent; /* Transparent border for gradient */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* .container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 0, 150, 0.5), rgba(0, 204, 255, 0.5)); 
+    z-index: 0;
+    border-radius: 8px;
+    filter: blur(10px);
+} */
+
+h1 {
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Bring h1 above the gradient */
+}
+
+.flex-container {
+    display: flex; /* Flexbox for two columns */
+    flex-grow: 1; /* Allow this section to grow */
+    margin-bottom: 20px;
+}
+
+.categories {
+    flex: 1; /* Left column for categories */
+    margin-right: 20px; /* Space between columns */
+    overflow-y: auto; /* Scroll if content overflows */
+    position: relative;
+    z-index: 1; /* Bring categories above the gradient */
+}
+
+.results {
+    flex: 2; /* Right column for results */
+    overflow-y: auto; /* Scroll if content overflows */
+    position: relative;
+    z-index: 1; /* Bring results above the gradient */
+}
+
+.category {
+    margin: 5px 0;
+}
+
+input[type="number"] {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #333; /* Dark input background */
+    color: #e0e0e0; /* Light text color */
+}
+
+input[type="number"]::placeholder {
+    color: #aaa; /* Placeholder color */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+}
+
+button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1; /* Make buttons take equal space */
+    margin: 0 5px; /* Space between buttons */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.loading:before {
+    content: '';
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #007BFF;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

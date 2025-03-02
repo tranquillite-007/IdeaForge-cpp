@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Word Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Random Word Generator</h1>
+        <div class="flex-container">
+            <div id="categories" class="categories">
+                <input type="checkbox" id="selectAll" />
+                <label for="selectAll">Select All</label>
+                <div id="categoryList"></div>
+            </div>
+            <div id="results" class="results"></div>
+        </div>
+        <input type="number" id="numWords" placeholder="Number of words (max 5)" min="1" max="5">
+        <div id="loading" class="loading" style="display: none;">Generating random words...</div>
+        <div class="button-container">
+            <button id="generateBtn">Generate Random Words</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
