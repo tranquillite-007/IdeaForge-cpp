@@ -23,10 +23,7 @@
 ```
 IdeaForge/
 ├── src/
-│   ├── main.cpp        # Main program file
-│   ├── FileManager.cpp # Handles file operations
-│   ├── UserHandler.cpp # Manages user input
-│   ├── RandomGen.cpp   # Generates random words
+│   ├── ideaGenerator.cpp # Main program file
 │
 ├── data/
 │   ├── word.txt        # Contains categories and words
@@ -34,6 +31,7 @@ IdeaForge/
 ├── README.md           # Project documentation
 ├── Makefile            # Compilation instructions
 ```
+- File structure is slightly different in updated version of main code file.
 
 ## 🛠 Prerequisites
 
